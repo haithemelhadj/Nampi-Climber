@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Rigidbody2D rb;
     [SerializeField][Range(0f, 1000f)] private float JumpForce;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private bool Grounded = false;
-    public Rigidbody2D rb;
-    private float LastY;
     [SerializeField] private bool GoingDown = false;
+    private float LastY;
     private Vector3 ScreenDimensions;
     private float DirectX;
     
