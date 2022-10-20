@@ -35,6 +35,8 @@ public class Movement : MonoBehaviour
         {
             GoingDown = false;
         }
+        LastY = transform.position.y;
+        //Debug.Log(GoingDown);
 
         // movement
         DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
@@ -72,7 +74,7 @@ public class Movement : MonoBehaviour
 
 
         //if grounded jump
-        if (Grounded == true)// && GoingDown == true)        
+        if (Grounded == true && GoingDown)     
         {            
             Grounded = false;
             rb.AddForce(transform.up * JumpForce  );            
@@ -83,7 +85,6 @@ public class Movement : MonoBehaviour
         if (other.gameObject.tag=="Ground")
         {
             Grounded = true;
-            Debug.Log("Grounded");
         }
     }
 
