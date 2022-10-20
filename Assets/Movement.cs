@@ -11,14 +11,15 @@ public class Movement : MonoBehaviour
     [SerializeField] private bool Grounded = false;
     public Rigidbody2D rb;
     private float LastY;
-    private bool GoingDown = false;
-
+    [SerializeField] private bool GoingDown = false;
+    private Vector3 ScreenDimensions;
     private float DirectX;
     
     // Start is called before the first frame update
     void Start()
     {
         LastY = transform.position.y;
+        ScreenDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));        
     }
 
     // Update is called once per frame
@@ -30,12 +31,10 @@ public class Movement : MonoBehaviour
         {
             GoingDown = true;
         }
-        else
+        if (transform.position.y > LastY)
         {
             GoingDown = false;
         }
-        LastY = transform.position.y;
-
 
         // movement
         DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
@@ -44,58 +43,56 @@ public class Movement : MonoBehaviour
 
 
         //move camera with player on y axis
-        if (transform.position.y > Camera.main.transform.position.y)
+        if (transform.position.y > Camera.main.transform.position.y )
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z);
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y , Camera.main.transform.position.z);
         }
 
         //move camer if player goes under -4 on y axis
-        if (transform.position.y < Camera.main.transform.position.y - 3f)
+        if (transform.position.y < Camera.main.transform.position.y - 4f)
         {
-            //Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z);
-            Camera.main.transform.Translate(0f, rb.velocity.y * Time.deltaTime, 0f);
-        }
-
-
-
-
-
-        //screen edge teleprort
-        if (gameObject.transform.position.x >= Camera.main.transform.position.x + (Camera.main.scaledPixelWidth / 2)) 
-        {
-            transform.position = new Vector3(Camera.main.transform.position.x - (Camera.main.scaledPixelWidth / 2), transform.position.y, transform.position.z);
-        }
-        if (gameObject.transform.position.x <= Camera.main.transform.position.x - (Camera.main.scaledPixelWidth / 2))
-        {
-            transform.position = new Vector3(Camera.main.transform.position.x + (Camera.main.scaledPixelWidth / 2), transform.position.y, transform.position.z);
-        }
-
-        //if grounded jump
-        if (Grounded == true && GoingDown == true)        
-        {            
-            Grounded = false;
-            rb.AddForce(transform.up * JumpForce  );
-            //rb.velocity = new Vector2(rb.velocity.x, JumpForce);
-
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y + 4f, Camera.main.transform.position.z);
             
         }
+
+        
+        //screen edge teleprort from left to right       
+        if (transform.position.x > Camera.main.transform.position.x + (ScreenDimensions.x ))
+        {
+            transform.position = new Vector3(Camera.main.transform.position.x - (ScreenDimensions.x ), transform.position.y, transform.position.z);
+        }                
+        
+        //screen edge teleport from right to left
+        else if (transform.position.x < Camera.main.transform.position.x - (ScreenDimensions.x ))
+        {
+            transform.position = new Vector3(Camera.main.transform.position.x + (ScreenDimensions.x ) , transform.position.y, transform.position.z);
+        }
+
+        
+
+
+        //if grounded jump
+        if (Grounded == true)// && GoingDown == true)        
+        {            
+            Grounded = false;
+            rb.AddForce(transform.up * JumpForce  );            
+        }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        rb.velocity = new Vector2(0f, 0f);
         if (other.gameObject.tag=="Ground")
         {
             Grounded = true;
-            //Debug.Log("Grounded");
+            Debug.Log("Grounded");
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+        
+    private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Ground")
         {
-            Grounded = false;
-            //Debug.Log("exit");
+            Grounded = false;            
         }
     }
 
