@@ -22,10 +22,22 @@ public class Movement : MonoBehaviour
         ScreenDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));        
     }
 
+    //move right and left
+    private void Move()
+    {
+        //get input
+        DirectX = Input.GetAxis("Horizontal");
+
+        //move
+        rb.velocity = new Vector2(DirectX * MoveSpeed, rb.velocity.y);
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
-
+        Move();
         //check if player is going down
         if (transform.position.y < LastY)
         {
@@ -62,8 +74,7 @@ public class Movement : MonoBehaviour
         if (transform.position.x > Camera.main.transform.position.x + (ScreenDimensions.x ))
         {
             transform.position = new Vector3(Camera.main.transform.position.x - (ScreenDimensions.x ), transform.position.y, transform.position.z);
-        }                
-        
+        }                        
         //screen edge teleport from right to left
         else if (transform.position.x < Camera.main.transform.position.x - (ScreenDimensions.x ))
         {
@@ -72,18 +83,20 @@ public class Movement : MonoBehaviour
 
         
 
-
+        /*
         //if grounded jump
         if (Grounded == true && GoingDown)     
         {            
-            Grounded = false;
             rb.AddForce(transform.up * JumpForce  );            
+            //Grounded = false;
         }
+        */
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag=="Ground")
+        if (other.gameObject.tag=="Ground" && GoingDown)
         {
+            rb.AddForce(transform.up * JumpForce);
             Grounded = true;
         }
     }
