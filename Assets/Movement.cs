@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private float LastY; // last y position of the player
     private Vector3 ScreenDimensions;
     private float DirectX;// direction of the player on x axes
+    //private bool Gameover = false;
 
 
     void Start()
@@ -93,20 +94,37 @@ public class Movement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
+        //if colliding with platform normal jump
         if (other.gameObject.tag=="Ground" && GoingDown)
         {
             rb.AddForce(transform.up * JumpForce);
-            //Grounded = true;
+        }
+        //if colliding with Bird normal jump
+        if (other.gameObject.tag == "Bird" && GoingDown)
+        {
+            rb.AddForce(transform.up * JumpForce);
+        }
+        //if colliding with mushroom super jump
+        if (other.gameObject.tag == "Mushroom" && GoingDown)
+        {
+            rb.AddForce(transform.up * JumpForce* 2);
+        }
+        //if colliding with sharp object die
+        if (other.gameObject.tag == "Sharp" && GoingDown)
+        {
+            //Debug.Log("Dead");
+            //Gameover= true;
         }
     }
 
-        
+
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Ground")
         {
             //Grounded = false;            
         }
+       
     }
 
 

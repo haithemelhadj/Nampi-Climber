@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4976845870513374829}
   m_Layer: 0
   m_Name: Sharp Platform
-  m_TagString: Ground
+  m_TagString: Sharp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
