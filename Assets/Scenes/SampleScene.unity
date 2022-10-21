@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &369070670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 369070671}
+  m_Layer: 0
+  m_Name: gameover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &369070671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369070670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.13795286, y: -5.83, z: 1.9055538}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &400359648
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +310,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Platforms:
   - {fileID: 3775827719258923386, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
+  - {fileID: 3775827719258923386, guid: 210d7c6a84e0708449ca64ea0cff5233, type: 3}
+  - {fileID: 3775827719258923386, guid: 49233e3af7bb2474b9175ac6411cf2dd, type: 3}
+  - {fileID: 3775827719258923386, guid: 9ce1c8fb19c8b6d4ab10a437ec127df9, type: 3}
+  - {fileID: 3775827719258923386, guid: 6898b0ac2b172f44c8b63929acc4190f, type: 3}
 --- !u!4 &636498416
 Transform:
   m_ObjectHideFlags: 0
@@ -941,7 +976,6 @@ MonoBehaviour:
   rb: {fileID: 932984030}
   JumpForce: 400
   MoveSpeed: 10
-  Grounded: 0
   GoingDown: 0
 --- !u!61 &932984034
 BoxCollider2D:
@@ -1767,12 +1801,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3775827719258923384, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775827719258923384, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3775827719258923384, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.64
+      value: -4.96
       objectReference: {fileID: 0}
     - target: {fileID: 3775827719258923384, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
       propertyPath: m_LocalPosition.z

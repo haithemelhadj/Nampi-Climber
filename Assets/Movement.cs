@@ -47,12 +47,21 @@ public class Movement : MonoBehaviour
             GoingDown = false;
         }
         LastY = transform.position.y;
-        //Debug.Log(GoingDown);
+        
 
         //movement
         DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
         transform.Translate(DirectX, 0f, 0f);
 
+        //if not going down set object to istrigger
+        if (!GoingDown)
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+        else
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+        }
 
 
         //move camera with player on y axis
@@ -72,12 +81,12 @@ public class Movement : MonoBehaviour
         //screen edge teleprort from left to right       
         if (transform.position.x > Camera.main.transform.position.x + (ScreenDimensions.x ))
         {
-            transform.position = new Vector3(Camera.main.transform.position.x - (ScreenDimensions.x ), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Camera.main.transform.position.x - (ScreenDimensions.x ) + 0.2f, transform.position.y, transform.position.z);
         }                        
         //screen edge teleport from right to left
         else if (transform.position.x < Camera.main.transform.position.x - (ScreenDimensions.x ))
         {
-            transform.position = new Vector3(Camera.main.transform.position.x + (ScreenDimensions.x ) , transform.position.y, transform.position.z);
+            transform.position = new Vector3(Camera.main.transform.position.x + (ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);
         }
 
         

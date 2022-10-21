@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
         if (transform.position.y < Camera.main.transform.position.y + 5f)
         {
             // get a random x position between screen borders
-            float RandomX = Random.Range(-Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x);
+            float RandomX = Random.Range(-Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x + 0.4f, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.4f);
 
             //spawn a random platform from Platforms at random x position
             Instantiate(Platforms[Random.Range(0, Platforms.Length)], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
