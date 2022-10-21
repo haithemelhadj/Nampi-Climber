@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    [SerializeField][Range(0f, 1000f)] private float JumpForce;
+    public Rigidbody2D rb;  //player rigidbody 
+    [SerializeField][Range(0f, 1000f)] private float JumpForce; 
     [SerializeField] private float MoveSpeed;
-    [SerializeField] private bool Grounded = false;
-    [SerializeField] private bool GoingDown = false;
-    private float LastY;
+    //[SerializeField] private bool Grounded = false;
+    [SerializeField] private bool GoingDown = false; // bool of the player is going down
+    private float LastY; // last y position of the player
     private Vector3 ScreenDimensions;
-    private float DirectX;
-    
-    // Start is called before the first frame update
+    private float DirectX;// direction of the player on x axes
+
+
     void Start()
     {
         LastY = transform.position.y;
@@ -32,9 +32,8 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(DirectX * MoveSpeed, rb.velocity.y);
     }
 
+    
 
-
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -50,7 +49,7 @@ public class Movement : MonoBehaviour
         LastY = transform.position.y;
         //Debug.Log(GoingDown);
 
-        // movement
+        //movement
         DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
         transform.Translate(DirectX, 0f, 0f);
 
@@ -82,22 +81,13 @@ public class Movement : MonoBehaviour
         }
 
         
-
-        /*
-        //if grounded jump
-        if (Grounded == true && GoingDown)     
-        {            
-            rb.AddForce(transform.up * JumpForce  );            
-            //Grounded = false;
-        }
-        */
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag=="Ground" && GoingDown)
         {
             rb.AddForce(transform.up * JumpForce);
-            Grounded = true;
+            //Grounded = true;
         }
     }
 
@@ -106,7 +96,7 @@ public class Movement : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
-            Grounded = false;            
+            //Grounded = false;            
         }
     }
 
