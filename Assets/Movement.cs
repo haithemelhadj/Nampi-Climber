@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
-{
+{   private Animator anim;
     public Rigidbody2D rb;  //player rigidbody 
     [SerializeField][Range(0f, 1000f)] private float JumpForce; 
     [SerializeField] private float MoveSpeed;
@@ -15,10 +15,11 @@ public class Movement : MonoBehaviour
     private Vector3 ScreenDimensions;
     private float DirectX;// direction of the player on x axes
     //private bool Gameover = false;
-
+    [SerializeField] GameObject bg;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         LastY = transform.position.y;
         ScreenDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));        
     }
@@ -69,6 +70,7 @@ public class Movement : MonoBehaviour
         if (transform.position.y > Camera.main.transform.position.y )
         {
             Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y , Camera.main.transform.position.z);
+            bg.transform.position = new Vector3(bg.transform.position.x, bg.transform.position.y + 5f , bg.transform.position.z);
         }
 
         //move camer if player goes under -4 on y axis
@@ -98,16 +100,19 @@ public class Movement : MonoBehaviour
         if (other.gameObject.tag=="Ground" && GoingDown)
         {
             rb.AddForce(transform.up * JumpForce);
+            anim.SetTrigger("isJumping");
         }
         //if colliding with Bird normal jump
         if (other.gameObject.tag == "Bird" && GoingDown)
         {
             rb.AddForce(transform.up * JumpForce);
+            anim.SetTrigger("isJumping");
         }
         //if colliding with mushroom super jump
         if (other.gameObject.tag == "Mushroom" && GoingDown)
         {
             rb.AddForce(transform.up * JumpForce* 2);
+            anim.SetTrigger("isJumping");
         }
         //if colliding with sharp object die
         if (other.gameObject.tag == "Sharp" && GoingDown)

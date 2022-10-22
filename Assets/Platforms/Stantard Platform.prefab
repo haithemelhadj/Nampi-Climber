@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3775827719258923390}
   - component: {fileID: 4976845870513374829}
   - component: {fileID: -1861452198655551270}
+  - component: {fileID: 6981005638343887243}
   m_Layer: 0
   m_Name: Stantard Platform
   m_TagString: Ground
@@ -30,7 +31,11 @@ Transform:
   m_GameObject: {fileID: 3775827719258923386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2753, y: -4.2302, z: 0}
-  m_LocalScale: {x: 3.2795, y: 3.5615, z: 0.20000002}
+<<<<<<< HEAD
+  m_LocalScale: {x: 4, y: 5, z: 0.20000002}
+=======
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> bf2d1555aefdedffee12639a93adb5c2367dcc71
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,7 +104,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.02256684}
   m_SpriteTilingProperty:
@@ -165,3 +170,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6981005638343887243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775827719258923386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176af54cc0d61b74f8d088d5e6e0c95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
