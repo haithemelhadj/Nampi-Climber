@@ -30,10 +30,14 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.8188, y: -4.3275, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalScale: {x: 4, y: 5, z: 0.20000002}
 =======
   m_LocalScale: {x: 0.8, y: 0.2, z: 0.20000002}
 >>>>>>> bf2d1555aefdedffee12639a93adb5c2367dcc71
+=======
+  m_LocalScale: {x: 0.8, y: 0.2, z: 0.20000002}
+>>>>>>> 3aeacc2ef34f44173f1eeff1cfd0f5954f34165d
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
