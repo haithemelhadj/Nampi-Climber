@@ -12,6 +12,10 @@ public class BirdMovement : MonoBehaviour
     void Start()
     {
         random = list[Random.Range(0, list.Length)];
+        if(random==-1)
+        {
+            flip();
+        }
     }
 
     // Update is called once per frame
@@ -19,17 +23,21 @@ public class BirdMovement : MonoBehaviour
     {
         if(!Down)
         {
-            // continusly move left and right between screen borders
-            //transform.position = new Vector3(list[Random.Range(0, list.Length)] * Mathf.PingPong(Time.time * 2, 4) - 2, transform.position.y, transform.position.z);
-            //translate betwwen 2 x points
+            // continusly move left and right between screen borders           
             if(transform.position.x >= Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.4f)
             {
                 random *= -1;
+                flip();
 
             }
             else if (transform.position.x <= -Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x+0.4f)
             {
                 random *= -1;
+                flip();
+            }
+            else
+            {
+                //Debug.Log("another bird bug idk");
             }
 
             transform.Translate(random * speed * Time.deltaTime, 0f, 0f);
@@ -38,14 +46,18 @@ public class BirdMovement : MonoBehaviour
         }
         else
         {
-            //get random either 1 or -1
-            
-            
             // move down
-
             transform.position = new Vector3(transform.position.x , transform.position.y - 2f * Time.deltaTime, transform.position.z);
         }
     }
+
+    void flip()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;    
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
