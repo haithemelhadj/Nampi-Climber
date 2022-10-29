@@ -16,6 +16,10 @@ public class Movement : MonoBehaviour
     private float DirectX;// direction of the player on x axes
     //private bool Gameover = false;
 
+    private void Awake()
+    {
+        
+    }
 
     void Start()
     {
@@ -50,7 +54,7 @@ public class Movement : MonoBehaviour
         LastY = transform.position.y;
         
 
-        //movement
+        //movement on pc
         DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
         transform.Translate(DirectX, 0f, 0f);
 
