@@ -46,8 +46,8 @@ public class Spawner : MonoBehaviour
             }
                 x = Random.Range(0, 100);
 
-            Debug.Log("std="+std);//49
-            Debug.Log("wei="+weight);//12.75
+            //Debug.Log("std="+std);//49
+            //Debug.Log("wei="+weight);//12.75
 
             if (x >= 0 && x < std)
             {
