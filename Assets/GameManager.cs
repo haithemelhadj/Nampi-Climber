@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool Gameover = false;
     public GameObject Buttons;
     public GameObject Player;
     public float GameOverVal = -6f;
-    public static bool Gameover = false;
-    [SerializeField] [Range(0f,20f)] private float ofset = 0f;
-
-
+    [SerializeField] [Range(0f,20f)] private float ofset = 0f;    
     [SerializeField][Range(0f, 2f)] public float initTimer;
     private float timer;
 
@@ -21,17 +19,11 @@ public class GameManager : MonoBehaviour
         timer = initTimer;
         Gameover = false;
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
-    {
+    {       
         KeepUpWithCamY();
         if(Player.transform.position.y  < GameOverVal )
         {
@@ -49,7 +41,15 @@ public class GameManager : MonoBehaviour
             {
                 timer = initTimer;
                 Buttons.SetActive(true);
-                Time.timeScale -= 0.2f;
+                if (Time.timeScale >= 0.2f)
+                {
+                    Time.timeScale -= 0.2f;
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                }
+                              
             }
         }
         
