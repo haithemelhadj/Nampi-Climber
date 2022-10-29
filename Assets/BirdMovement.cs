@@ -42,7 +42,7 @@ public class BirdMovement : MonoBehaviour
 
             transform.Translate(random * speed * Time.deltaTime, 0f, 0f);
 
-
+            
         }
         else
         {
