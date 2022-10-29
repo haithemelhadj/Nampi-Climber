@@ -14,24 +14,14 @@ public class Spawner : MonoBehaviour
     float x;   //random number betwwen 0 and 100 
     int n = 0;//future used platfrom index
     float std = 100;//max value of the possibility of getting a standard platform 
-
     int save=1;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
 
         Score = spawner.transform.position.y + 3f;
-
-
-
+        
         //if position is less than camera position + 5 spawn a platform 
         if (transform.position.y < Camera.main.transform.position.y + 5f)
         {
@@ -69,8 +59,6 @@ public class Spawner : MonoBehaviour
             {
                 n = 4;
             }
-            
-            
             
             if (n == save)
             {
