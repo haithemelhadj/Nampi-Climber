@@ -43,11 +43,11 @@ public class Spawner : MonoBehaviour
             {
                 weight = (Score * factorial) / 4;
                 std = 100 - Score * factorial;
-                x = Random.Range(0, 100);
             }
+                x = Random.Range(0, 100);
 
-            Debug.Log("std="+std);
-            Debug.Log("wei="+weight);
+            Debug.Log("std="+std);//49
+            Debug.Log("wei="+weight);//12.75
 
             if (x >= 0 && x < std)
             {
