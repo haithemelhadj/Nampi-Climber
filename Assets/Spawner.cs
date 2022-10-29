@@ -37,45 +37,51 @@ public class Spawner : MonoBehaviour
         {
             // get a random x position between screen borders
             float RandomX = Random.Range(-Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x + 0.4f, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.4f);
+           
+            //get a random weighted platform index
+            if (std >= 50)
+            {
+                weight = (Score * factorial) / 4;
+                std = 100 - Score * factorial;
+                x = Random.Range(0, 100);
+            }
 
-            //do
-            //{
-                //get a random weighted platform index
-                if (std >= 20)
-                {
-                    weight = (Score * factorial) / 4;
-                    std = 100 - Score * factorial;
-                    x = Random.Range(0, 100);
-                }
+            Debug.Log("std="+std);
+            Debug.Log("wei="+weight);
 
-                Debug.Log("std="+std);
-                Debug.Log("wei="+weight);
-
-                if (x >= 0 && x < std)
-                {
-                    n = 0;
-                }
-                if (x >= std && x < std + weight)
+            if (x >= 0 && x < std)
+            {
+                n = 0;
+            }
+            if (x >= std && x < std + weight)
+            {
+                n = 1;
+            }
+            if (x >= std + weight && x < std + weight * 2)
+            {
+                n = 2;
+            }
+            if (x >= std + weight * 2 && x < std + weight * 3)
+            {
+                n = 3;
+            }
+            if (x >= std + weight * 3 && x < std + weight * 4)
+            {
+                n = 4;
+            }
+            
+            
+            
+            if (n == save)
+            {
+                n ++;
+                if (n > 4)
                 {
                     n = 1;
                 }
-                if (x >= std + weight && x < std + weight * 2)
-                {
-                    n = 2;
-                }
-                if (x >= std + weight * 2 && x < std + weight * 3)
-                {
-                    n = 3;
-                }
-                if (x >= std + weight * 3 && x < std + weight * 4)
-                {
-                    n = 4;
-                }
+            }
 
-            //} while (n == save);
-
-
-                if (n ==1 || n == 2 || n == 3 || n ==4 )
+            if (n ==1 || n == 2 || n == 3 || n ==4 )
             {
                 save = n;
             }
