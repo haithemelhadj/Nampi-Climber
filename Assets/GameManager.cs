@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject Buttons;
     public GameObject Player;
     public float GameOverVal = -6f;
     private bool Gameover = false;
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
         if(Player.transform.position.y  < GameOverVal)
         {
             Debug.Log("Game Over");
+            Buttons.SetActive(true);
+            Time.timeScale = 0f;
             //Gameover = true;
         }
 
