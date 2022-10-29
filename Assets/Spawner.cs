@@ -38,15 +38,18 @@ public class Spawner : MonoBehaviour
             // get a random x position between screen borders
             float RandomX = Random.Range(-Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x + 0.4f, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.4f);
 
-            do
-            {
+            //do
+            //{
                 //get a random weighted platform index
-                if (std > 20)
+                if (std >= 20)
                 {
                     weight = (Score * factorial) / 4;
                     std = 100 - Score * factorial;
                     x = Random.Range(0, 100);
                 }
+
+                Debug.Log("std="+std);
+                Debug.Log("wei="+weight);
 
                 if (x >= 0 && x < std)
                 {
@@ -69,7 +72,7 @@ public class Spawner : MonoBehaviour
                     n = 4;
                 }
 
-            } while (n == save);
+            //} while (n == save);
 
 
                 if (n ==1 || n == 2 || n == 3 || n ==4 )
