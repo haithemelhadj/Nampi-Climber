@@ -8,12 +8,18 @@ public class GameManager : MonoBehaviour
     public GameObject Buttons;
     public GameObject Player;
     public float GameOverVal = -6f;
-    private bool Gameover = false;
+    public static bool Gameover = false;
     [SerializeField] [Range(0f,20f)] private float ofset = 0f;
+
+
+    [SerializeField][Range(0f, 2f)] public float initTimer;
+    private float timer;
 
     private void Awake()
     {
         Time.timeScale = 1;
+        timer = initTimer;
+        Gameover = false;
     }
 
 
@@ -27,19 +33,27 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         KeepUpWithCamY();
-        if(Player.transform.position.y  < GameOverVal)
+        if(Player.transform.position.y  < GameOverVal )
         {
             Debug.Log("Game Over");
-            Buttons.SetActive(true);
-            Time.timeScale = 0f;
-            //Gameover = true;
+            Gameover = true;
         }
 
-        if (Gameover)
+        if(Gameover)
         {
-            //game over
-            
+            if (timer > 0)
+            {
+                timer -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                timer = initTimer;
+                Buttons.SetActive(true);
+                Time.timeScale -= 0.2f;
+            }
         }
+        
+        
 
 
     }

@@ -251,6 +251,7 @@ MonoBehaviour:
   Player: {fileID: 932984029}
   GameOverVal: -6
   ofset: 5
+  initTimer: 0.5
 --- !u!1 &466723490
 GameObject:
   m_ObjectHideFlags: 0
