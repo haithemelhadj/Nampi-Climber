@@ -24,13 +24,13 @@ public class BirdMovement : MonoBehaviour
         if(!Down)
         {
             // continusly move left and right between screen borders           
-            if(transform.position.x >= Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.4f)
+            if(transform.position.x >= Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.2f)
             {
                 random *= -1;
                 flip();
 
             }
-            else if (transform.position.x <= -Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x+0.4f)
+            else if (transform.position.x <= -Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x+0.2f)
             {
                 random *= -1;
                 flip();
