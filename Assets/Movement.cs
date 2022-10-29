@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     private float LastY; // last y position of the player
     private Vector3 ScreenDimensions;
     private float DirectX;// direction of the player on x axes
+    private bool Staying = false;// to detect when player is still in collision without enter
     
 
     private void Awake()
@@ -100,7 +101,7 @@ public class Movement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         //if colliding with platform normal jump
-        if (other.gameObject.tag=="Ground" && GoingDown)
+        if (other.gameObject.tag == "Ground" && GoingDown)
         {
             rb.AddForce(transform.up * JumpForce);
         }
@@ -112,16 +113,24 @@ public class Movement : MonoBehaviour
         //if colliding with mushroom super jump
         if (other.gameObject.tag == "Mushroom" && GoingDown)
         {
-            rb.AddForce(transform.up * JumpForce* 2);
+            rb.AddForce(transform.up * JumpForce * 2);
         }
         //if colliding with sharp object gameover
         if (other.gameObject.tag == "Sharp" && GoingDown)
         {
-            
-            GameManager.Gameover= true;
+            GameManager.Gameover = true;
         }
     }
 
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        //Staying = true;
+        
+        Debug.Log("stay");
+
+
+        
+    }
 
 
 

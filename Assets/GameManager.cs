@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // always set camera to 16:9 portrait
+        
+
+        
         Time.timeScale = 1;
         timer = initTimer;
         Gameover = false;
@@ -48,14 +52,9 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     Time.timeScale = 0;
-                }
-                              
+                }                              
             }
         }
-        
-        
-
-
     }
 
 
