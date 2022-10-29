@@ -602,6 +602,8 @@ MonoBehaviour:
   - {fileID: 3775827719258923386, guid: 49233e3af7bb2474b9175ac6411cf2dd, type: 3}
   - {fileID: 3775827719258923386, guid: 9ce1c8fb19c8b6d4ab10a437ec127df9, type: 3}
   - {fileID: 3775827719258923386, guid: 6898b0ac2b172f44c8b63929acc4190f, type: 3}
+  spawner: {fileID: 636498414}
+  factorial: 1
 --- !u!4 &636498416
 Transform:
   m_ObjectHideFlags: 0

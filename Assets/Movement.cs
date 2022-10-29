@@ -125,8 +125,18 @@ public class Movement : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         //Staying = true;
-        
         Debug.Log("stay");
+
+
+        /* 
+         * 
+         * do code here if staying true
+         * 
+         * 
+         */
+        //staying = false;
+
+
 
 
         
