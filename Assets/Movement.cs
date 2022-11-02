@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     private float LastY; // last y position of the player
     private Vector3 ScreenDimensions;
     private float DirectX;// direction of the player on x axes
-    private bool Staying = false;// to detect when player is still in collision without enter
+    //private bool Staying = false;// to detect when player is still in collision without enter
     
 
     private void Awake()
@@ -56,9 +56,18 @@ public class Movement : MonoBehaviour
         LastY = transform.position.y;
         
 
-        //movement on pc
+        //movement on pc or with tilting the phone
         DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
         transform.Translate(DirectX, 0f, 0f);
+
+        //move Player with finger
+        if (Input.touchCount > 0 && Input.touchCount == 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = (Camera.main.ScreenToWorldPoint(touch.position));
+            touchPosition.y = transform.position.y;
+            transform.position = touchPosition;
+        }
 
         //if not going down set object to istrigger
         if (!GoingDown)

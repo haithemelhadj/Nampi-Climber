@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0f,20f)] private float ofset = 0f;    
     [SerializeField][Range(0f, 2f)] public float initTimer;
     private float timer;
+    private bool GameStarted = true;
 
     private void Awake()
     {
@@ -19,7 +20,8 @@ public class GameManager : MonoBehaviour
         
 
         
-        Time.timeScale = 1;
+        Time.timeScale = 1;//=0
+        
         timer = initTimer;
         Gameover = false;
     }
@@ -27,34 +29,37 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {       
-        KeepUpWithCamY();
-        if(Player.transform.position.y  < GameOverVal )
+    {
+        //start game after player touch screen
+        if (!GameStarted && Input.touchCount > 0)
         {
-            Debug.Log("Game Over");
-            Gameover = true;
+            GameStarted = true;
+            Time.timeScale = 1;
         }
-
-        if(Gameover)
+        if(GameStarted)
         {
-            if (timer > 0)
+            KeepUpWithCamY();
+            if (Player.transform.position.y < GameOverVal)
             {
-                timer -= Time.fixedDeltaTime;
+                //Debug.Log("Game Over");
+                Gameover = true;
             }
-            else
+
+            if (Gameover)
             {
-                timer = initTimer;
-                Buttons.SetActive(true);
-                if (Time.timeScale >= 0.2f)
+                if (timer > 0)
                 {
-                    Time.timeScale -= 0.2f;
+                    timer -= Time.fixedDeltaTime;
                 }
                 else
                 {
+                    timer = initTimer;
                     Time.timeScale = 0;
-                }                              
+                    Buttons.SetActive(true);
+
+                }
             }
-        }
+        }        
     }
 
 
@@ -75,5 +80,39 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+
+    public void ShowOptionsMenu()
+    {
+        //show options menu
+        Buttons.SetActive(false);
+        //OptionsMenu.SetActive(true);
+    }
+    
+
+    public void GoMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
+    
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+
+    //slow down time
+    /*
+    if (Time.timeScale >= 0.2f)
+            {
+                Time.timeScale -= 0.2f;
+            }
+            else
+            {
+                Time.timeScale = 0;
+            } 
+    */
 }
+
 
