@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         }
         if(GameStarted)
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             KeepUpWithCamY();
             if (Player.transform.position.y < GameOverVal)
             {
