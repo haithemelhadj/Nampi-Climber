@@ -8,16 +8,14 @@ public class GameManager : MonoBehaviour
     public static bool Gameover = false;
     public GameObject Buttons;
     public GameObject Player;
-    public float GameOverVal = -6f;
-    [SerializeField] [Range(0f,20f)] private float ofset = 0f;    
-    [SerializeField][Range(0f, 2f)] public float initTimer;
-    private float timer;
-    private bool GameStarted = true;
+    public float GameOverVal = 6f;
+    [SerializeField] [Range(0f,20f)] private float ofset ;  // camera hight /2  
+    [SerializeField][Range(0f, 2f)] public float initTimer; // initial cd for death
+    private float timer; // timer for death
+    private bool GameStarted = true; 
 
     private void Awake()
     {
-        // always set camera to 16:9 portrait
-        
 
         
         Time.timeScale = 1;//=0
@@ -50,7 +48,7 @@ public class GameManager : MonoBehaviour
             {
                 if (timer > 0)
                 {
-                    timer -= Time.fixedDeltaTime;
+                    timer -= Time.deltaTime;
                 }
                 else
                 {
@@ -69,7 +67,7 @@ public class GameManager : MonoBehaviour
         // if the camera is higher than the gameover value, set the gameover value to the camera's y position
         if (Camera.main.transform.position.y - 5f >= GameOverVal)
         {
-            GameOverVal = Camera.main.transform.position.y-ofset;
+            GameOverVal = Camera.main.transform.position.y-5f;
         }
     }
 
