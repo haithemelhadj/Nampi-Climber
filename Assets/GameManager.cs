@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //start game after player touch screen
-        if (!GameStarted && Input.touchCount > 0)
+        if (!GameStarted && Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))
         {
             GameStarted = true;
             Time.timeScale = 1;
