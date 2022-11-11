@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 6571
+  controlID: 99
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 6548
+  controlID: 21
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 6549
+  controlID: 22
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -296,8 +296,8 @@ MonoBehaviour:
     y: 0
     width: 416.80005
     height: 730.8
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -430,7 +430,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 206dffffbe9cffff00d8ffff84d8ffff82daffff44dbffff76dcfffff4dcffff4cddffff4af7ffff5af8ffff1ef9ffffbcf9ffff28fbffff1a63000036660000e8660000007f0000207f00002a7f0000347f0000
+      m_ExpandedIDs: bce5ffff28fbffff6e6000008a600000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -701,9 +701,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.855514, y: -0.82670534, z: 0.05177326}
+    m_Target: {x: -0.517756, y: -0.19865215, z: -0.029025499}
     speed: 2
-    m_Value: {x: -1.855514, y: -0.82670534, z: 0.05177326}
+    m_Value: {x: -0.517756, y: -0.19865215, z: -0.029025499}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -754,9 +754,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.843445
+    m_Target: 7.692211
     speed: 2
-    m_Value: 6.843445
+    m_Value: 7.692211
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -954,22 +954,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Users\kuruttakao\Documents\GitHub\Nampi-Climber
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 16}
-    m_SelectedIDs: 62620000
-    m_LastClickedID: 25186
-    m_ExpandedIDs: 000000002c6200002e62000030620000326200003462000036620000386200003a6200003c6200003e6200004062000000ca9a3b
+    m_SelectedIDs: 38620000
+    m_LastClickedID: 25144
+    m_ExpandedIDs: 0000000030620000326200003462000036620000386200003a6200003c6200003e62000040620000426200004462000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -997,7 +997,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002c6200002e62000030620000326200003462000036620000386200003a6200003c6200003e6200004062000000ca9a3b
+    m_ExpandedIDs: 0000000030620000326200003462000036620000386200003a6200003c6200003e620000406200004262000044620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

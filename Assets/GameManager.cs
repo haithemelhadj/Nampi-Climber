@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0f,20f)] private float ofset ;  // camera hight /2  
     [SerializeField][Range(0f, 2f)] public float initTimer; // initial cd for death
     private float timer; // timer for death
-    private bool GameStarted; 
+    private bool GameStarted;
+    public GameObject Tips;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         {
             GameStarted = true;
             Time.timeScale = 1;
+            Tips.SetActive(false);
         }
         if(GameStarted)
         {
