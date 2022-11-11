@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Range(0f,20f)] private float ofset ;  // camera hight /2  
     [SerializeField][Range(0f, 2f)] public float initTimer; // initial cd for death
     private float timer; // timer for death
-    private bool GameStarted = true; 
+    private bool GameStarted; 
 
     private void Awake()
     {
+        GameStarted = false;
 
-        
-        Time.timeScale = 1;//=0
+        Time.timeScale = 0;//=0
         
         timer = initTimer;
         Gameover = false;
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         }
         if(GameStarted)
         {
+            
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             KeepUpWithCamY();
             if (Player.transform.position.y < GameOverVal)

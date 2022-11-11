@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
         transform.Translate(DirectX, 0f, 0f);
 
         //move Player with finger
-        if (Input.touchCount > 0 && Input.touchCount == 0)
+        if (Input.touchCount > 0 || Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
             Vector2 touchPosition = (Camera.main.ScreenToWorldPoint(touch.position));

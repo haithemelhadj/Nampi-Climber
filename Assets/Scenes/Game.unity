@@ -374,7 +374,6 @@ MonoBehaviour:
   GameOverVal: -6
   ofset: 5
   initTimer: 1
-  timer: 0
 --- !u!1 &466723490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3775827719258923384, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3775827719258923384, guid: bc9fa4bdab3311b49a8640c5beea4af0, type: 3}
       propertyPath: m_LocalPosition.y
