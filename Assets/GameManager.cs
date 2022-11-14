@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     {
         GameStarted = false;
 
-        Time.timeScale = 0;//=0
+        Time.timeScale = 0;
         
         timer = initTimer;
         Gameover = false;
@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //show options menu button
     public void ShowOptionsMenu()
     {
         //show options menu
@@ -90,26 +91,11 @@ public class GameManager : MonoBehaviour
         //OptionsMenu.SetActive(true);
     }
     
-
+    // go to main meni button 
     public void GoMainMenu()
     {
         SceneManager.LoadScene(0);
-    }
-    
-    
-
-
-    //slow down time
-    /*
-    if (Time.timeScale >= 0.2f)
-            {
-                Time.timeScale -= 0.2f;
-            }
-            else
-            {
-                Time.timeScale = 0;
-            } 
-    */
+    }   
 }
 
 

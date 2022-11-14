@@ -7,26 +7,23 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     
-    public Rigidbody2D rb;  //player rigidbody 
+    public Rigidbody2D rb;                                                      //player rigidbody 
     [SerializeField][Range(0f, 1000f)] private float JumpForce; 
-    [SerializeField] private float MoveSpeed;
+    [SerializeField] private float MoveSpeed;                                   // player movement speed
     //[SerializeField] private bool Grounded = false;
-    [SerializeField] private bool GoingDown = false; // bool of the player is going down
-    private float LastY; // last y position of the player
-    private Vector3 ScreenDimensions;
-    private float DirectX;// direction of the player on x axes
-    //private bool Staying = false;// to detect when player is still in collision without enter
+    [SerializeField] private bool GoingDown = false;                            // bool of the player is going down
+    private float LastY;                                                        // last y position of the player
+    private Vector3 ScreenDimensions;                                           // screen dimensions variable
+    private float DirectX;                                                      // direction of the player on x axes
+    public Camera Camera;
+    public Collider2D Collider;                                                                               
     
-
-    private void Awake()
-    {
-        
-    }
+    
 
     void Start()
     {
         LastY = transform.position.y;
-        ScreenDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));        
+        ScreenDimensions = Camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));        
     }
 
     //move right and left
@@ -37,13 +34,37 @@ public class Movement : MonoBehaviour
 
         //move
         rb.velocity = new Vector2(DirectX * MoveSpeed, rb.velocity.y);
+
+        //movement with tilting the phone
+        DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
+        
+        transform.Translate(DirectX, 0f, 0f);
+
+
+
+
+        //move Player with finger
+        if (Input.touchCount > 0 || Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = (Camera.ScreenToWorldPoint(touch.position));
+
+
+            if (touchPosition.x > transform.position.x)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(touchPosition.x, transform.position.y), MoveSpeed * Time.deltaTime);
+            }
+            else if (touchPosition.x < transform.position.x)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(touchPosition.x, transform.position.y), MoveSpeed * Time.deltaTime);
+            }
+        }
     }
 
     
 
     void Update()
     {
-        Move();
         //check if player is going down
         if (transform.position.y < LastY)
         {
@@ -54,103 +75,76 @@ public class Movement : MonoBehaviour
             GoingDown = false;
         }
         LastY = transform.position.y;
-        
 
-        //movement on pc or with tilting the phone
-        DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
-        transform.Translate(DirectX, 0f, 0f);
+        Move();
 
-        //move Player with finger
-        if (Input.touchCount > 0 || Input.touchCount == 1)
-        {
-            Touch touch = Input.GetTouch(0);
-            Vector2 touchPosition = (Camera.main.ScreenToWorldPoint(touch.position));
-            touchPosition.y = transform.position.y;
-            transform.position = touchPosition;
-        }
+
 
         //if not going down set object to istrigger
+        // when going up collision is still detected 
+        //trigger is to prevent animation start when going up
         if (!GoingDown)
         {
-            GetComponent<BoxCollider2D>().isTrigger = true;
+            Collider.isTrigger = true;
         }
         else
         {
-            GetComponent<BoxCollider2D>().isTrigger = false;
+            Collider.isTrigger = false;
         }
-
+        
 
         //move camera with player on y axis
-        if (transform.position.y > Camera.main.transform.position.y )
+        if (transform.position.y > Camera.transform.position.y )
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y , Camera.main.transform.position.z);
+            Camera.transform.position = new Vector3(Camera.transform.position.x, transform.position.y , Camera.transform.position.z);
         }
 
         //move camer if player goes under -4 on y axis
-        if (transform.position.y < Camera.main.transform.position.y - 4f)
+        if (transform.position.y < Camera.transform.position.y - 4f)
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, transform.position.y + 4f, Camera.main.transform.position.z);
+            Camera.transform.position = new Vector3(Camera.transform.position.x, transform.position.y + 4f, Camera.transform.position.z);
             
         }
 
         
         //screen edge teleprort from left to right       
-        if (transform.position.x > Camera.main.transform.position.x + (ScreenDimensions.x ))
+        if (transform.position.x > Camera.transform.position.x + (ScreenDimensions.x ))
         {
-            transform.position = new Vector3(Camera.main.transform.position.x - (ScreenDimensions.x ) + 0.2f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(Camera.transform.position.x - (ScreenDimensions.x ) + 0.2f, transform.position.y, transform.position.z);
         }                        
         //screen edge teleport from right to left
-        else if (transform.position.x < Camera.main.transform.position.x - (ScreenDimensions.x ))
+        else if (transform.position.x < Camera.transform.position.x - (ScreenDimensions.x ))
         {
-            transform.position = new Vector3(Camera.main.transform.position.x + (ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);
+            transform.position = new Vector3(Camera.transform.position.x + (ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);
         }
 
         
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //if colliding with platform normal jump
-        if (other.gameObject.tag == "Ground" && GoingDown)
+        if(GoingDown)
         {
-            rb.AddForce(transform.up * JumpForce);
+            //if colliding with platform normal jump        
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                rb.AddForce(transform.up * JumpForce);
+            }
+            //if colliding with Bird normal jump
+            if (other.gameObject.CompareTag("Bird"))
+            {
+                rb.AddForce(transform.up * JumpForce);
+            }
+            //if colliding with mushroom super jump
+            if (other.gameObject.CompareTag("Mushroom"))
+            {
+                rb.AddForce(transform.up * JumpForce * 2);
+            }
+            //if colliding with sharp object gameover
+            if (other.gameObject.CompareTag("Sharp"))
+            {
+                GameManager.Gameover = true;
+            }
         }
-        //if colliding with Bird normal jump
-        if (other.gameObject.tag == "Bird" && GoingDown)
-        {
-            rb.AddForce(transform.up * JumpForce);
-        }
-        //if colliding with mushroom super jump
-        if (other.gameObject.tag == "Mushroom" && GoingDown)
-        {
-            rb.AddForce(transform.up * JumpForce * 2);
-        }
-        //if colliding with sharp object gameover
-        if (other.gameObject.tag == "Sharp" && GoingDown)
-        {
-            GameManager.Gameover = true;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        //Staying = true;
-        //Debug.Log("stay");
-
-
-        /* 
-         * 
-         * do code here if staying true
-         * 
-         * 
-         */
-        //staying = false;
-
-
-
-
         
     }
-
-
-
 }
