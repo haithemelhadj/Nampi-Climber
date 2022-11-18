@@ -15,8 +15,8 @@ public class Spawner : MonoBehaviour
     int n = 0;//future used platfrom index
     float std = 100;//max value of the possibility of getting a standard platform 
     int save=1;
+    public GameObject Coin;
     
-    // Update is called once per frame
     void Update()
     {
 
@@ -74,6 +74,7 @@ public class Spawner : MonoBehaviour
                 save = n;
             }
 
+            int SpawnCoin = Random.Range(0, 10);
             
             // n is the index of the chosen platform
             //Debug.Log(weight);
@@ -81,6 +82,10 @@ public class Spawner : MonoBehaviour
 
             //spawn a random platform[n] from Platforms at random x position
             Instantiate(Platforms[n], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
+            if (SpawnCoin == 1)
+            {
+                Instantiate(Coin, new Vector3(RandomX, transform.position.y + 0.5f, 0), Quaternion.identity);
+            }
             //Instantiate(Platforms[Random.Range(0, Platforms.Length)], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
 
             //move the spawner up

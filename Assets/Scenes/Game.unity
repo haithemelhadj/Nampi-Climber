@@ -783,6 +783,7 @@ MonoBehaviour:
   - {fileID: 3775827719258923386, guid: 6898b0ac2b172f44c8b63929acc4190f, type: 3}
   spawner: {fileID: 636498414}
   factorial: 1
+  Coin: {fileID: 8713901866851231791, guid: 2df984051fbca6441922e969bd255dc4, type: 3}
 --- !u!4 &636498416
 Transform:
   m_ObjectHideFlags: 0
@@ -1130,8 +1131,8 @@ GameObject:
   - component: {fileID: 932984031}
   - component: {fileID: 932984030}
   - component: {fileID: 932984034}
-  - component: {fileID: 932984035}
   - component: {fileID: 932984036}
+  - component: {fileID: 932984035}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player

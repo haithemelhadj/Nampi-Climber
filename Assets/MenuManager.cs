@@ -5,18 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+  
 
     //go next scene
     public void NextScene()
@@ -24,7 +13,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-
+    //quit game 
     public void QuitGame()
     {
         Application.Quit();

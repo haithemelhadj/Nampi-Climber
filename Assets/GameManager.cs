@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static bool Gameover = false;
+    public static int TotalCoins;
     public GameObject Buttons;
     public GameObject Player;
     public float GameOverVal = 6f;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     }
     
 
-    // Update is called once per frame
+    
     void Update()
     {
         //start game after player touch screen
