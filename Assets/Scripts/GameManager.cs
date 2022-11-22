@@ -2,19 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static bool Gameover = false;
-    public static int TotalCoins;
-    public GameObject Buttons;
-    public GameObject Player;
-    public float GameOverVal = 6f;
-    [SerializeField] [Range(0f,20f)] private float ofset ;  // camera hight /2  
-    [SerializeField][Range(0f, 2f)] public float initTimer; // initial cd for death
-    private float timer; // timer for death
-    private bool GameStarted;
-    public GameObject Tips;
+    private bool GameStarted;                               //boolean to let the player start the game by pressing
+    
+    public float GameOverVal = 6f;                          //a float set to decide when the player loses
+    [SerializeField] [Range(0f,20f)] private float ofset ;  //camera hight /2  
+    [SerializeField][Range(0f, 2f)] public float initTimer; //initial cd for death
+    private float timer;                                    //timer for death
+    
+    public Camera MainCamera;                               //the main camera 
+    
+    public GameObject Player;                               //player game object ref
+    public GameObject Buttons;                              //in game menu buttons
+    public GameObject Tips;                                 //text tips in the start of the game
+    public GameObject Spawner;                              //the spawner object refrence and also the refrence to the score
+    
+    public int HighScore;                                   //the high score 
+    public TextMeshProUGUI H_scoreText;                     //the high score in text
+
+    public static int TotalCoins;                           //the number of coins 
+    public TextMeshProUGUI TotalCoinsText;                  //the number of coins in text
+
 
     private void Awake()
     {
@@ -26,10 +39,18 @@ public class GameManager : MonoBehaviour
         Gameover = false;
     }
     
-
+    private void Start()
+    {
+        HighScore = PlayerPrefs.GetInt("HighScore", 0);
+        H_scoreText.text = HighScore.ToString();
+        TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+        TotalCoinsText.text = TotalCoins.ToString();
+    }
     
+
     void Update()
     {
+        SaveData();
         //start game after player touch screen
         if (!GameStarted && Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))
         {
@@ -71,7 +92,7 @@ public class GameManager : MonoBehaviour
         // if the camera is higher than the gameover value, set the gameover value to the camera's y position
         if (Camera.main.transform.position.y - 5f >= GameOverVal)
         {
-            GameOverVal = Camera.main.transform.position.y-5f;
+            GameOverVal = MainCamera.transform.position.y-5f;
         }
     }
 
@@ -96,7 +117,25 @@ public class GameManager : MonoBehaviour
     public void GoMainMenu()
     {
         SceneManager.LoadScene(0);
-    }   
+    }
+
+    //save coins and high score data
+    public void SaveData()
+    {
+        if (Spawner.transform.position.y-5 > HighScore)
+        {
+            HighScore = (int)Spawner.transform.position.y-5;
+            PlayerPrefs.SetInt("HighScore", HighScore);
+            H_scoreText.text = HighScore.ToString();
+        }
+        PlayerPrefs.SetInt("TotalCoins", TotalCoins);
+        TotalCoinsText.text = TotalCoins.ToString();
+
+
+
+    }
+
+
 }
 
 

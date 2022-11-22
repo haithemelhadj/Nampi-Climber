@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] Platforms;
 
-    [SerializeField] private GameObject spawner;
+    [SerializeField] public GameObject spawner;
 
     [SerializeField][Range(0f, 1f)] private float factorial;
     float Score = 0;//score

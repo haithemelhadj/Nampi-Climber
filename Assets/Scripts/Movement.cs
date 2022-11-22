@@ -76,7 +76,12 @@ public class Movement : MonoBehaviour
         }
         LastY = transform.position.y;
 
-        Move();
+        if (GameManager.Gameover == false)
+        {
+            Move();
+        }
+
+        
 
 
 
@@ -145,7 +150,16 @@ public class Movement : MonoBehaviour
                 GameManager.Gameover = true;
             }
         }
-        
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            //coint count +1
+            //GameManager.TotalCoins++;
+            //GameManager.TotalCoinsText.text = GameManager.TotalCoins.ToString();
+            
+
+        }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

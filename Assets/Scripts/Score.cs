@@ -9,14 +9,13 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject spawner;
     [SerializeField]private TextMeshProUGUI scoreText;
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
+    
+    
     void Update()
     {
-        scoreText.text = ((spawner.transform.position.y)+3).ToString("");
+        if(((spawner.transform.position.y) - 5)>=0)
+        {
+            scoreText.text = ((spawner.transform.position.y) - 5).ToString("");
+        }        
     }
 }
