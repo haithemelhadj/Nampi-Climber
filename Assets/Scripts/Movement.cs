@@ -16,7 +16,8 @@ public class Movement : MonoBehaviour
     private Vector3 ScreenDimensions;                                           // screen dimensions variable
     private float DirectX;                                                      // direction of the player on x axes
     public Camera Camera;
-    public Collider2D Collider;                                                                               
+    public Collider2D Collider;
+    public Animator animator;
     
     
 
@@ -148,6 +149,8 @@ public class Movement : MonoBehaviour
             if (other.gameObject.CompareTag("Sharp"))
             {
                 GameManager.Gameover = true;
+                animator.SetTrigger("isDead");
+                
             }
         }
         if (other.gameObject.CompareTag("Coin"))
