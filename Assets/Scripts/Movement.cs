@@ -7,14 +7,14 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     
-    public Rigidbody2D rb;                                                      //player rigidbody 
+    public Rigidbody2D rb;                                        //player rigidbody 
     [SerializeField][Range(0f, 1000f)] private float JumpForce; 
-    [SerializeField] private float MoveSpeed;                                   // player movement speed
+    [SerializeField] private float MoveSpeed;                     // player movement speed
     //[SerializeField] private bool Grounded = false;
-    [SerializeField] private bool GoingDown = false;                            // bool of the player is going down
-    private float LastY;                                                        // last y position of the player
-    private Vector3 ScreenDimensions;                                           // screen dimensions variable
-    private float DirectX;                                                      // direction of the player on x axes
+    [SerializeField] private bool GoingDown = false;              // bool of the player is going down
+    private float LastY;                                          // last y position of the player
+    private Vector3 ScreenDimensions;                             // screen dimensions variable
+    private float DirectX;                                        // direction of the player on x axes
     public Camera Camera;
     public Collider2D Collider;                                                                               
     
