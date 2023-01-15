@@ -1633,6 +1633,7 @@ MonoBehaviour:
   GoingDown: 0
   Camera: {fileID: 519420031}
   Collider: {fileID: 932984034}
+  animator: {fileID: 932984035}
 --- !u!61 &932984034
 BoxCollider2D:
   m_ObjectHideFlags: 0
