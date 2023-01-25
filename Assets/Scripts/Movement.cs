@@ -112,7 +112,7 @@ public class Movement : MonoBehaviour
         if (transform.position.y < GameManager.MainCamera.transform.position.y - 4f)
         {
             GameManager.MainCamera.transform.position = new Vector3(GameManager.MainCamera.transform.position.x, transform.position.y + 4f, GameManager.MainCamera.transform.position.z);
-            GameManager.MainCamera.transform.Translate(Vector2.down*rb.velocity.y);
+            //GameManager.MainCamera.transform.Translate(Vector2.down*rb.velocity.y);
         }
 
         
