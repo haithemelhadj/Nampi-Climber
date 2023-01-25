@@ -6,27 +6,30 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
-{
+{    
     public static bool Gameover = false;
     private bool GameStarted;                               //boolean to let the player start the game by pressing
     
     public float GameOverVal = 6f;                          //a float set to decide when the player loses
-    [SerializeField] [Range(0f,20f)] private float ofset ;  //camera hight /2  
+    [SerializeField][Range(0f,20f)] private float ofset ;   //camera hight /2  
     [SerializeField][Range(0f, 2f)] public float initTimer; //initial cd for death
     private float timer;                                    //timer for death
     
-    public Camera MainCamera;                               //the main camera 
-    
-    public GameObject Player;                               //player game object ref
+    public static Camera MainCamera;                        //the main camera 
+    public static Vector3 ScreenDimensions;                 // screen dimensions variable
+
+    public static GameObject Player;                               //player game object ref
     public GameObject Buttons;                              //in game menu buttons
     public GameObject Tips;                                 //text tips in the start of the game
-    public GameObject Spawner;                              //the spawner object refrence and also the refrence to the score
+    public GameObject PlatformSpawner;                      //the spawner object refrence and also the refrence to the score
     
     public int HighScore;                                   //the high score 
     public TextMeshProUGUI H_scoreText;                     //the high score in text
 
     public static int TotalCoins;                           //the number of coins 
     public TextMeshProUGUI TotalCoinsText;                  //the number of coins in text
+
+    //public static GameObject Player;
 
 
     private void Awake()
@@ -37,6 +40,10 @@ public class GameManager : MonoBehaviour
         
         timer = initTimer;
         Gameover = false;
+        MainCamera = Camera.main;
+        ScreenDimensions = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+        Player = GameObject.Find("Player");
     }
     
     private void Start()
@@ -122,9 +129,9 @@ public class GameManager : MonoBehaviour
     //save coins and high score data
     public void SaveData()
     {
-        if (Spawner.transform.position.y-5 > HighScore)
+        if (PlatformSpawner.transform.position.y-5 > HighScore)
         {
-            HighScore = (int)Spawner.transform.position.y-5;
+            HighScore = (int)PlatformSpawner.transform.position.y-5;
             PlayerPrefs.SetInt("HighScore", HighScore);
             H_scoreText.text = HighScore.ToString();
         }

@@ -13,18 +13,20 @@ public class Movement : MonoBehaviour
     //[SerializeField] private bool Grounded = false;
     [SerializeField] private bool GoingDown = false;                            // bool of the player is going down
     private float LastY;                                                        // last y position of the player
-    private Vector3 ScreenDimensions;                                           // screen dimensions variable
+    //private Vector3 ScreenDimensions;                                           // screen dimensions variable
     private float DirectX;                                                      // direction of the player on x axes
-    public Camera Camera;
+    //public Camera Camera;
     public Collider2D Collider;
     public Animator animator;
-    
-    
+
+    public GameObject Player;
 
     void Start()
     {
         LastY = transform.position.y;
-        ScreenDimensions = Camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));        
+        GameManager.ScreenDimensions = GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+        //TpPos = new Vector3(GameManager.MainCamera.transform.position.x + (GameManager.ScreenDimensions.x) - 0.2f, transform.position.y, transform.position.z);
     }
 
     //move right and left
@@ -48,7 +50,7 @@ public class Movement : MonoBehaviour
         if (Input.touchCount > 0 || Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
-            Vector2 touchPosition = (Camera.ScreenToWorldPoint(touch.position));
+            Vector2 touchPosition = (GameManager.MainCamera.ScreenToWorldPoint(touch.position));
 
 
             if (touchPosition.x > transform.position.x)
@@ -80,6 +82,7 @@ public class Movement : MonoBehaviour
         if (GameManager.Gameover == false)
         {
             Move();
+            //flip();
         }
 
         
@@ -100,28 +103,29 @@ public class Movement : MonoBehaviour
         
 
         //move camera with player on y axis
-        if (transform.position.y > Camera.transform.position.y )
+        if (transform.position.y > GameManager.MainCamera.transform.position.y )
         {
-            Camera.transform.position = new Vector3(Camera.transform.position.x, transform.position.y , Camera.transform.position.z);
+            GameManager.MainCamera.transform.position = new Vector3(GameManager.MainCamera.transform.position.x, transform.position.y , GameManager.MainCamera.transform.position.z);
         }
 
         //move camer if player goes under -4 on y axis
-        if (transform.position.y < Camera.transform.position.y - 4f)
+        if (transform.position.y < GameManager.MainCamera.transform.position.y - 4f)
         {
-            Camera.transform.position = new Vector3(Camera.transform.position.x, transform.position.y + 4f, Camera.transform.position.z);
-            
+            GameManager.MainCamera.transform.position = new Vector3(GameManager.MainCamera.transform.position.x, transform.position.y + 4f, GameManager.MainCamera.transform.position.z);
+            GameManager.MainCamera.transform.Translate(Vector2.down*rb.velocity.y);
         }
 
         
         //screen edge teleprort from left to right       
-        if (transform.position.x > Camera.transform.position.x + (ScreenDimensions.x ))
+        if (transform.position.x > GameManager.MainCamera.transform.position.x + (GameManager.ScreenDimensions.x ))
         {
-            transform.position = new Vector3(Camera.transform.position.x - (ScreenDimensions.x ) + 0.2f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(GameManager.MainCamera.transform.position.x - (GameManager.ScreenDimensions.x ) + 0.2f, transform.position.y, transform.position.z);
         }                        
         //screen edge teleport from right to left
-        else if (transform.position.x < Camera.transform.position.x - (ScreenDimensions.x ))
+        else if (transform.position.x < GameManager.MainCamera.transform.position.x - (GameManager.ScreenDimensions.x ))
         {
-            transform.position = new Vector3(Camera.transform.position.x + (ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);
+            transform.position = new Vector3(GameManager.MainCamera.transform.position.x + (GameManager.ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);
+            
         }
 
         

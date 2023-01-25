@@ -136,4 +136,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8713901866851231790}
-  collider: {fileID: 8713901866851231787}
+  CoinCollider: {fileID: 8713901866851231787}

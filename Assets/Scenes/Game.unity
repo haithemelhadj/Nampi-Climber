@@ -372,11 +372,9 @@ MonoBehaviour:
   GameOverVal: -6
   ofset: 5
   initTimer: 0.7
-  MainCamera: {fileID: 519420031}
-  Player: {fileID: 932984029}
   Buttons: {fileID: 1980460918}
   Tips: {fileID: 685032968}
-  Spawner: {fileID: 636498414}
+  PlatformSpawner: {fileID: 636498414}
   HighScore: 0
   H_scoreText: {fileID: 1517847546}
   TotalCoinsText: {fileID: 729837827}
@@ -651,7 +649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -105, y: -4}
+  m_AnchoredPosition: {x: -104.999985, y: -4}
   m_SizeDelta: {x: 120, y: 69}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &545188740
@@ -1631,9 +1629,9 @@ MonoBehaviour:
   JumpForce: 400
   MoveSpeed: 10
   GoingDown: 0
-  Camera: {fileID: 519420031}
   Collider: {fileID: 932984034}
   animator: {fileID: 932984035}
+  Player: {fileID: 0}
 --- !u!61 &932984034
 BoxCollider2D:
   m_ObjectHideFlags: 0

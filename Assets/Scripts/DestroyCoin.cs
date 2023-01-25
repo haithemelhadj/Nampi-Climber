@@ -8,7 +8,7 @@ public class DestroyCoin : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         GameObject.Destroy(animator.gameObject);
-        Debug.Log("destroyed");
+        //Debug.Log("destroyed");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

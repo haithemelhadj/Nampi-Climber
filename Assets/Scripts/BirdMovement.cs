@@ -24,13 +24,15 @@ public class BirdMovement : MonoBehaviour
         if(!Down)
         {
             // continusly move left and right between screen borders           
-            if(transform.position.x >= Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.1f)
+            //if(transform.position.x >= GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.1f)
+            if(transform.position.x >= GameManager.ScreenDimensions.x - 0.1f)
             {
                 random *= -1;
                 flip();
 
             }
-            else if (transform.position.x <= -Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x+0.1f)
+            //else if (transform.position.x <= -GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x+0.1f)
+            else if (transform.position.x <= -GameManager.ScreenDimensions.x + 0.1f)
             {
                 random *= -1;
                 flip();
@@ -55,7 +57,8 @@ public class BirdMovement : MonoBehaviour
     {
         Vector3 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
-        gameObject.transform.localScale = currentScale;    
+        gameObject.transform.localScale = currentScale;
+        //gameObject.transform.localScale *= -1;
     }
 
 

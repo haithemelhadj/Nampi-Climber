@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] Platforms;
-
+    private Vector3 SpawnerPos;
     [SerializeField] public GameObject spawner;
 
     [SerializeField][Range(0f, 1f)] private float factorial;
@@ -16,25 +16,33 @@ public class Spawner : MonoBehaviour
     float std = 100;//max value of the possibility of getting a standard platform 
     int save=1;
     public GameObject Coin;
-    
+
+    private void Start()
+    {
+        SpawnerPos = transform.position;
+    }
     void Update()
     {
+        spawning();
+    }
 
+    private void spawning()
+    {
         Score = spawner.transform.position.y + 3f;
-        
+
         //if position is less than camera position + 5 spawn a platform 
-        if (transform.position.y < Camera.main.transform.position.y + 5f)
+        if (transform.position.y < GameManager.MainCamera.transform.position.y + 5f)
         {
             // get a random x position between screen borders
-            float RandomX = Random.Range(-Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x + 0.4f, Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.4f);
-           
+            float RandomX = Random.Range(-GameManager.ScreenDimensions.x + 0.4f, GameManager.ScreenDimensions.x - 0.4f);
+
             //get a random weighted platform index
             if (std >= 50)
             {
                 weight = (Score * factorial) / 4;
                 std = 100 - Score * factorial;
             }
-                x = Random.Range(0, 100);
+            x = Random.Range(0, 100);
 
             //Debug.Log("std="+std);//49
             //Debug.Log("wei="+weight);//12.75
@@ -59,23 +67,23 @@ public class Spawner : MonoBehaviour
             {
                 n = 4;
             }
-            
+
             if (n == save)
             {
-                n ++;
+                n++;
                 if (n > 4)
                 {
                     n = 1;
                 }
             }
 
-            if (n ==1 || n == 2 || n == 3 || n ==4 )
+            if (n == 1 || n == 2 || n == 3 || n == 4)
             {
                 save = n;
             }
 
             int SpawnCoin = Random.Range(0, 10);
-            
+
             // n is the index of the chosen platform
             //Debug.Log(weight);
             //Debug.Log(std);
@@ -89,7 +97,12 @@ public class Spawner : MonoBehaviour
             //Instantiate(Platforms[Random.Range(0, Platforms.Length)], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
 
             //move the spawner up
-            transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+            SpawnerPos = transform.position;
+            SpawnerPos.x += 1;
+            transform.position = SpawnerPos;//new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+
+            
+            
         }
     }
 }
