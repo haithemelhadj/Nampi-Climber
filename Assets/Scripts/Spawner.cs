@@ -96,9 +96,7 @@ public class Spawner : MonoBehaviour
             }
             //Instantiate(Platforms[Random.Range(0, Platforms.Length)], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
 
-            //move the spawner up
-            //SpawnerPos = transform.position;
-            //SpawnerPos.x += 1;
+            //move the spawner up            
             transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
 
             
