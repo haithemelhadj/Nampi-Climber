@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject Player;                               //player game object ref
     public GameObject Buttons;                              //in game menu buttons
+    public GameObject PauseButton;
     public GameObject Tips;                                 //text tips in the start of the game
     public GameObject PlatformSpawner;                      //the spawner object refrence and also the refrence to the score
     
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
         GameStarted = false;
 
         Time.timeScale = 0;
-        
+        PauseButton.SetActive(false);
         timer = initTimer;
         Gameover = false;
         MainCamera = Camera.main;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             GameStarted = true;
             Time.timeScale = 1;
             Tips.SetActive(false);
+            PauseButton.SetActive(true);
         }
         if(GameStarted)
         {
@@ -111,14 +113,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
-
+    
+    /*
     //show options menu button
-    public void ShowOptionsMenu()
+    public void ShowOptionsMenu(bool show)
     {
         //show options menu
-        Buttons.SetActive(false);
+        Buttons.SetActive(show);
         //OptionsMenu.SetActive(true);
     }
+    */
     
     // go to main meni button 
     public void GoMainMenu()
@@ -138,11 +142,19 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("TotalCoins", TotalCoins);
         TotalCoinsText.text = TotalCoins.ToString();
 
-
-
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        Buttons.SetActive(true);
+    }
 
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        Buttons.SetActive(false);
+    }
 }
 
 
