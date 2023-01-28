@@ -24,14 +24,6 @@ public class GameManager : MonoBehaviour
     public GameObject Tips;                                 //text tips in the start of the game
     public GameObject PlatformSpawner;                      //the spawner object refrence and also the refrence to the score
     
-    public int HighScore;                                   //the high score 
-    public TextMeshProUGUI H_scoreText;                     //the high score in text
-
-    public static int TotalCoins;                           //the number of coins 
-    public TextMeshProUGUI TotalCoinsText;                  //the number of coins in text
-
-    //public static GameObject Player;
-
 
     private void Awake()
     {
@@ -45,13 +37,22 @@ public class GameManager : MonoBehaviour
         ScreenDimensions = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
         Player = GameObject.Find("Player");
+
+        Volume = BackGroundTheme.GetComponent<AudioSource>().volume;
+        Debug.Log(Volume);
     }
     
+    
+    public int HighScore;                                   //the high score 
+    public TextMeshProUGUI H_scoreText;                     //the high score in text
+
+    public static int TotalCoins;                           //the number of coins 
+    public TextMeshProUGUI TotalCoinsText;                  //the number of coins in text
     private void Start()
     {
-        HighScore = PlayerPrefs.GetInt("HighScore", 0);
-        H_scoreText.text = HighScore.ToString();
-        TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+        HighScore = PlayerPrefs.GetInt("HighScore", 0);     // update highscore on start
+        H_scoreText.text = HighScore.ToString()+"m";
+        TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);   //Update coin count on start
         TotalCoinsText.text = TotalCoins.ToString();
     }
     
@@ -74,7 +75,6 @@ public class GameManager : MonoBehaviour
             KeepUpWithCamY();
             if (Player.transform.position.y < GameOverVal)
             {
-                //Debug.Log("Game Over");
                 Gameover = true;
             }
 
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
                 }
             }
-        }        
+        }
     }
 
 
@@ -105,26 +105,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     //reset level function
     public void ResetLevel()
     {
         //reset level
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
-    
-    /*
-    //show options menu button
-    public void ShowOptionsMenu(bool show)
-    {
-        //show options menu
-        Buttons.SetActive(show);
-        //OptionsMenu.SetActive(true);
-    }
-    */
-    
-    // go to main meni button 
+        
+    // go to main menu button 
     public void GoMainMenu()
     {
         SceneManager.LoadScene(0);
@@ -141,7 +129,6 @@ public class GameManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("TotalCoins", TotalCoins);
         TotalCoinsText.text = TotalCoins.ToString();
-
     }
 
     public void PauseGame()
@@ -152,9 +139,42 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
-        Buttons.SetActive(false);
+        if(!Gameover)
+        {
+            Time.timeScale = 1;
+            Buttons.SetActive(false);
+        }
+        
+    }
+
+
+    //sound settings
+    public AudioSource BackGroundTheme;
+    public Button SoundButton;
+    float Volume;
+    public Sprite SoundOff;
+    public Sprite SoundOn;
+    public void ToggleSound()
+    {
+        if(BackGroundTheme.mute == false)
+        {
+            BackGroundTheme.mute = true;
+            SoundButton.image.sprite = SoundOff;
+        }
+        else if (BackGroundTheme.mute == true)
+        {
+            BackGroundTheme.mute = false;
+            SoundButton.image.sprite = SoundOn;
+        }
     }
 }
 
 
+/*
+ * bird animation on death
+ * nampi jump animation
+ * 
+ * create a leader board
+ * add sound effects
+ * 
+ */

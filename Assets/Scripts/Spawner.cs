@@ -9,11 +9,11 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject spawner;
 
     [SerializeField][Range(0f, 1f)] private float factorial;
-    float Score = 0;//score
-    float weight;//the value of possibility of getting each platform
-    float x;   //random number betwwen 0 and 100 
-    int n = 0;//future used platfrom index
-    float std = 100;//max value of the possibility of getting a standard platform 
+    float Score = 0;                                    //score
+    float weight;                                       //the value of possibility of getting each platform
+    float x;                                            //random number betwwen 0 and 100 
+    int n = 0;                                          //future used platfrom index
+    float std = 100;                                    //max value of the possibility of getting a standard platform 
     int save=1;
     public GameObject Coin;
 
@@ -43,9 +43,6 @@ public class Spawner : MonoBehaviour
                 std = 100 - Score * factorial;
             }
             x = Random.Range(0, 100);
-
-            //Debug.Log("std="+std);//49
-            //Debug.Log("wei="+weight);//12.75
 
             if (x >= 0 && x < std)
             {
@@ -85,22 +82,16 @@ public class Spawner : MonoBehaviour
             int SpawnCoin = Random.Range(0, 10);
 
             // n is the index of the chosen platform
-            //Debug.Log(weight);
-            //Debug.Log(std);
-
             //spawn a random platform[n] from Platforms at random x position
             Instantiate(Platforms[n], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
             if (SpawnCoin == 1)
             {
                 Instantiate(Coin, new Vector3(RandomX, transform.position.y + 0.5f, 0), Quaternion.identity);
             }
-            //Instantiate(Platforms[Random.Range(0, Platforms.Length)], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
-
+            
             //move the spawner up            
             transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
 
-            
-            
         }
     }
 }

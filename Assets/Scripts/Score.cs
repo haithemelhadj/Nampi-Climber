@@ -15,7 +15,7 @@ public class Score : MonoBehaviour
     {
         if(((spawner.transform.position.y) - 5)>=0)
         {
-            scoreText.text = ((spawner.transform.position.y) - 5).ToString("");
+            scoreText.text = ((spawner.transform.position.y) - 5).ToString("")+"m";
         }        
     }
 }

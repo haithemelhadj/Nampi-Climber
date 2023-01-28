@@ -8,28 +8,25 @@ public class Movement : MonoBehaviour
 {
     
     public Rigidbody2D rb;                                                      //player rigidbody 
-    [SerializeField][Range(0f, 1000f)] private float JumpForce; 
+    [SerializeField][Range(0f, 1000f)] private float JumpForce;                 //player normal jump force
     [SerializeField] private float MoveSpeed;                                   // player movement speed
-    //[SerializeField] private bool Grounded = false;
+    [SerializeField] [Range(1f, 5f)] float multiplier;                          // jump multiplier for the mushromm 
     [SerializeField] private bool GoingDown = false;                            // bool of the player is going down
+        
     private float LastY;                                                        // last y position of the player
-    //private Vector3 ScreenDimensions;                                           // screen dimensions variable
     private float DirectX;                                                      // direction of the player on x axes
-    //public Camera Camera;
+    
     public Collider2D Collider;
     public Animator animator;
-
     public GameObject Player;
 
     void Start()
     {
         LastY = transform.position.y;
         GameManager.ScreenDimensions = GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-
-        //TpPos = new Vector3(GameManager.MainCamera.transform.position.x + (GameManager.ScreenDimensions.x) - 0.2f, transform.position.y, transform.position.z);
     }
 
-    //move right and left
+    //move right and left function
     private void Move()
     {
         //get input
@@ -64,8 +61,6 @@ public class Movement : MonoBehaviour
         }
     }
 
-    
-
     void Update()
     {
         //check if player is going down
@@ -86,9 +81,6 @@ public class Movement : MonoBehaviour
         }
 
         
-
-
-
         //if not going down set object to istrigger
         // when going up collision is still detected 
         //trigger is to prevent animation start when going up
@@ -112,7 +104,6 @@ public class Movement : MonoBehaviour
         if (transform.position.y < GameManager.MainCamera.transform.position.y - 4f)
         {
             GameManager.MainCamera.transform.position = new Vector3(GameManager.MainCamera.transform.position.x, transform.position.y + 4f, GameManager.MainCamera.transform.position.z);
-            //GameManager.MainCamera.transform.Translate(Vector2.down*rb.velocity.y);
         }
 
         
@@ -124,12 +115,10 @@ public class Movement : MonoBehaviour
         //screen edge teleport from right to left
         else if (transform.position.x < GameManager.MainCamera.transform.position.x - (GameManager.ScreenDimensions.x ))
         {
-            transform.position = new Vector3(GameManager.MainCamera.transform.position.x + (GameManager.ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);
-            
+            transform.position = new Vector3(GameManager.MainCamera.transform.position.x + (GameManager.ScreenDimensions.x ) - 0.2f , transform.position.y, transform.position.z);            
         }
-
-        
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(GoingDown)
@@ -147,30 +136,15 @@ public class Movement : MonoBehaviour
             //if colliding with mushroom super jump
             if (other.gameObject.CompareTag("Mushroom"))
             {
-                rb.AddForce(transform.up * JumpForce * 2);
+                rb.AddForce(transform.up * JumpForce * multiplier);
             }
+
             //if colliding with sharp object gameover
             if (other.gameObject.CompareTag("Sharp"))
             {
                 GameManager.Gameover = true;
-                animator.SetTrigger("isDead");
-                
+                animator.SetTrigger("isDead");                
             }
         }
-        if (other.gameObject.CompareTag("Coin"))
-        {
-            //coint count +1
-            //GameManager.TotalCoins++;
-            //GameManager.TotalCoinsText.text = GameManager.TotalCoins.ToString();
-            
-
-        }
-
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
     }
 }

@@ -11,12 +11,9 @@ public class remove_coin : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            //Debug.Log("collision");
             anim.SetTrigger("picked");
             GameManager.TotalCoins++;
-            //Debug.Log("added coin");
             CoinCollider.enabled = false;
-            //Debug.Log("collider off");
         }
     }
 }

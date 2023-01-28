@@ -8,7 +8,7 @@ public class BirdMovement : MonoBehaviour
     private int[] list = { -1, 1 };
     private int random;
     private float speed = 1f;
-    // Start is called before the first frame update
+
     void Start()
     {
         random = list[Random.Range(0, list.Length)];
@@ -24,14 +24,12 @@ public class BirdMovement : MonoBehaviour
         if(!Down)
         {
             // continusly move left and right between screen borders           
-            //if(transform.position.x >= GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - 0.1f)
             if(transform.position.x >= GameManager.ScreenDimensions.x - 0.1f)
             {
                 random *= -1;
                 flip();
 
             }
-            //else if (transform.position.x <= -GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x+0.1f)
             else if (transform.position.x <= -GameManager.ScreenDimensions.x + 0.1f)
             {
                 random *= -1;
@@ -41,10 +39,7 @@ public class BirdMovement : MonoBehaviour
             {
                 //Debug.Log("another bird bug idk");
             }
-
             transform.Translate(random * speed * Time.deltaTime, 0f, 0f);
-
-            
         }
         else
         {
@@ -58,7 +53,6 @@ public class BirdMovement : MonoBehaviour
         Vector3 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
-        //gameObject.transform.localScale *= -1;
     }
 
 
