@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     public Collider2D Collider;
     public Animator animator;
     public GameObject Player;
+    public bool accelerometer = true;
 
     void Start()
     {
@@ -35,28 +36,30 @@ public class Movement : MonoBehaviour
         //move
         rb.velocity = new Vector2(DirectX * MoveSpeed, rb.velocity.y);
 
-        //movement with tilting the phone
-        DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
-        
-        transform.Translate(DirectX, 0f, 0f);
-
-
-
-
-        //move Player with finger
-        if (Input.touchCount > 0 || Input.touchCount == 1)
+        if(accelerometer)
         {
-            Touch touch = Input.GetTouch(0);
-            Vector2 touchPosition = (GameManager.MainCamera.ScreenToWorldPoint(touch.position));
+            //movement with tilting the phone
+            DirectX = Input.acceleration.x * MoveSpeed * Time.deltaTime;
+        
+            transform.Translate(DirectX, 0f, 0f);
+        }
+        else
+        {
+            //move Player with finger
+            if (Input.touchCount > 0 || Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
+                Vector2 touchPosition = (GameManager.MainCamera.ScreenToWorldPoint(touch.position));
 
 
-            if (touchPosition.x > transform.position.x)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, new Vector2(touchPosition.x, transform.position.y), MoveSpeed * Time.deltaTime);
-            }
-            else if (touchPosition.x < transform.position.x)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, new Vector2(touchPosition.x, transform.position.y), MoveSpeed * Time.deltaTime);
+                if (touchPosition.x > transform.position.x)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(touchPosition.x, transform.position.y), MoveSpeed * Time.deltaTime);
+                }
+                else if (touchPosition.x < transform.position.x)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(touchPosition.x, transform.position.y), MoveSpeed * Time.deltaTime);
+                }
             }
         }
     }
@@ -147,4 +150,10 @@ public class Movement : MonoBehaviour
             }
         }
     }
+    
+    public void TogglleControllers(bool tog)
+    {
+        accelerometer = tog;
+    }
+    
 }

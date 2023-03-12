@@ -29,8 +29,7 @@ public class GameManager : MonoBehaviour
     {
         GameStarted = false;
 
-        Time.timeScale = 0;
-        PauseButton.SetActive(false);
+        Time.timeScale = 0;        
         timer = initTimer;
         Gameover = false;
         MainCamera = Camera.main;
@@ -39,7 +38,10 @@ public class GameManager : MonoBehaviour
         Player = GameObject.Find("Player");
 
         Volume = BackGroundTheme.GetComponent<AudioSource>().volume;
-        Debug.Log(Volume);
+        //Debug.Log(Volume);
+
+        Tips.SetActive(true);
+        PauseButton.SetActive(false);
     }
     
     

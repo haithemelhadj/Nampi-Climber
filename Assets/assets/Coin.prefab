@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 8713901866851231790}
   CoinCollider: {fileID: 8713901866851231787}
+  coincollect: {fileID: 8300000, guid: 6cce8e57c1222c14698ec57670c7b6da, type: 3}
 --- !u!114 &-5139315488224002169
 MonoBehaviour:
   m_ObjectHideFlags: 0
