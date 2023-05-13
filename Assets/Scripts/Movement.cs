@@ -19,10 +19,11 @@ public class Movement : MonoBehaviour
     public Collider2D Collider;
     public Animator animator;
     public GameObject Player;
-    public bool accelerometer = true;
+    public bool accelerometer;
 
     void Start()
     {
+        accelerometer = PlayerPrefs.GetInt("Accelerometer") == 1;
         LastY = transform.position.y;
         GameManager.ScreenDimensions = GameManager.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
     }
@@ -154,6 +155,10 @@ public class Movement : MonoBehaviour
     public void TogglleControllers(bool tog)
     {
         accelerometer = tog;
+        Debug.Log("accelerometer: " + accelerometer);
+        //save to player prefs
+        PlayerPrefs.SetInt ("Accelerometer", tog ? 1 : 0);
+
     }
     
 }
