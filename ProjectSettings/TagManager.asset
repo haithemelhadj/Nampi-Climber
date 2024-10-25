@@ -10,6 +10,9 @@ TagManager:
   - Sharp
   - Bird
   - Coin
+  - Bubble
+  - Trap
+  - Cloud
   layers:
   - Default
   - TransparentFX

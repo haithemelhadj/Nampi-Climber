@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -8,13 +8,13 @@ public class Spawner : MonoBehaviour
     private Vector3 SpawnerPos;
     [SerializeField] public GameObject spawner;
 
-    [SerializeField][Range(0f, 1f)] private float factorial;
+    [SerializeField][Range(0f, 1f)] private float factorial = 1f;
     float Score = 0;                                    //score
     float weight;                                       //the value of possibility of getting each platform
-    float x;                                            //random number betwwen 0 and 100 
-    int n = 0;                                          //future used platfrom index
-    float std = 100;                                    //max value of the possibility of getting a standard platform 
-    int save=1;
+    float randomChance;                                            //random number betwwen 0 and 100 
+    int platformNumber = 0;                                          //future used platfrom index
+    float stdPlatformChance = 100;                                    //max value of the possibility of getting a standard platform 
+    int lastPlatformNumber = 1;
     public GameObject Coin;
 
     private void Start()
@@ -24,7 +24,25 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         spawning();
+        SpawnClouds();
     }
+
+    bool cloudSpawned = false;
+    public GameObject[] Clouds;
+    int spawnCd = 0;
+    int spawnCounter = 0;
+    public void SpawnClouds()
+    {
+            
+        float cloudSpawnRandomizer = Random.Range(0f, 100f);
+        if (cloudSpawnRandomizer < 10 && !cloudSpawned) 
+        {
+            float randomXPosition = Random.Range(-GameManager.ScreenDimensions.x + 0.4f, GameManager.ScreenDimensions.x - 0.4f);
+            Instantiate(Clouds[Random.Range(0, Clouds.Length)], new Vector3(randomXPosition, transform.position.y + Random.Range(0.2f,2f), 0), Quaternion.identity);
+            cloudSpawned = true;
+        }
+    }
+
 
     private void spawning()
     {
@@ -34,64 +52,71 @@ public class Spawner : MonoBehaviour
         if (transform.position.y < GameManager.MainCamera.transform.position.y + 5f)
         {
             // get a random x position between screen borders
-            float RandomX = Random.Range(-GameManager.ScreenDimensions.x + 0.4f, GameManager.ScreenDimensions.x - 0.4f);
+            float randomXPosition = Random.Range(-GameManager.ScreenDimensions.x + 0.4f, GameManager.ScreenDimensions.x - 0.4f);
 
             //get a random weighted platform index
-            if (std >= 50)
+            if (stdPlatformChance >= 50)//decrece standard platform chance and increase other platforms chnaces with weight
             {
-                weight = (Score * factorial) / 4;
-                std = 100 - Score * factorial;
+                weight = (Score) / 4;// * factorial) / 4;   //4 is the number of available platforms
+                stdPlatformChance = 100 - Score;// * factorial;
             }
-            x = Random.Range(0, 100);
+            randomChance = Random.Range(0, 100);
 
-            if (x >= 0 && x < std)
+            // platformNumber is the index of the chosen platform
+            if (randomChance >= 0 && randomChance < stdPlatformChance)
             {
-                n = 0;
+                platformNumber = 0;
             }
-            if (x >= std && x < std + weight)
+            if (randomChance >= stdPlatformChance && randomChance < stdPlatformChance + weight)
             {
-                n = 1;
+                platformNumber = 1;
             }
-            if (x >= std + weight && x < std + weight * 2)
+            if (randomChance >= stdPlatformChance + weight && randomChance < stdPlatformChance + weight * 2)
             {
-                n = 2;
+                platformNumber = 2;
             }
-            if (x >= std + weight * 2 && x < std + weight * 3)
+            if (randomChance >= stdPlatformChance + weight * 2 && randomChance < stdPlatformChance + weight * 3)
             {
-                n = 3;
+                platformNumber = 3;
             }
-            if (x >= std + weight * 3 && x < std + weight * 4)
+            if (randomChance >= stdPlatformChance + weight * 3 && randomChance < stdPlatformChance + weight * 4)
             {
-                n = 4;
+                platformNumber = 4;
             }
 
-            if (n == save)
+            if (platformNumber == lastPlatformNumber)//can't repeat the same special platform twice
             {
-                n++;
-                if (n > 4)
+                platformNumber++;
+                if (platformNumber > 4)
                 {
-                    n = 1;
+                    platformNumber = 1;
                 }
             }
 
-            if (n == 1 || n == 2 || n == 3 || n == 4)
+            if (platformNumber != 0)
             {
-                save = n;
+                lastPlatformNumber = platformNumber;
             }
 
-            int SpawnCoin = Random.Range(0, 10);
+            //spawn a random platform[platformNumber] from Platforms at random x position
+            Instantiate(Platforms[platformNumber], new Vector3(randomXPosition, transform.position.y, 0), Quaternion.identity);
 
-            // n is the index of the chosen platform
-            //spawn a random platform[n] from Platforms at random x position
-            Instantiate(Platforms[n], new Vector3(RandomX, transform.position.y, 0), Quaternion.identity);
+            //choose if to spawn a coin with platform or not
+            int SpawnCoin = Random.Range(0, 10);
             if (SpawnCoin == 1)
             {
-                Instantiate(Coin, new Vector3(RandomX, transform.position.y + 0.5f, 0), Quaternion.identity);
+                Instantiate(Coin, new Vector3(randomXPosition, transform.position.y + 0.5f, 0), Quaternion.identity);
             }
-            
+
             //move the spawner up            
             transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-
+            spawnCd++;
+        }
+        if(spawnCd>=spawnCounter)
+        {
+            cloudSpawned = false;
+            spawnCd = 0;
+            spawnCounter = Random.Range(2, 5);
         }
     }
 }

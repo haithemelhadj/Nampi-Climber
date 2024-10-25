@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1852810309, guid: d14289f35e893ab48a0dce7fb5de1ff8, type: 3}
+  m_Sprite: {fileID: -2005098751, guid: 408499864c07d41428eed5ef97496c14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 8713901866851231790}
   CoinCollider: {fileID: 8713901866851231787}
-  coincollect: {fileID: 8300000, guid: 6cce8e57c1222c14698ec57670c7b6da, type: 3}
+  coincollect: {fileID: 8300000, guid: 3e9b118097008054b83f5b301fe65e40, type: 3}
 --- !u!114 &-5139315488224002169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +151,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71e96418053c3d418813deeedd52c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 0

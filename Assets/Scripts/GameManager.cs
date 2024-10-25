@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         GameStarted = false;
-
+        BackGroundTheme.mute = PlayerPrefs.GetInt("SoundSettings", SoundSettings) == 1;
+        if(!BackGroundTheme.mute) SoundButton.image.sprite = SoundOn;
         Time.timeScale = 0;        
         timer = initTimer;
         Gameover = false;
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         HighScore = PlayerPrefs.GetInt("HighScore", 0);     // update highscore on start
-        H_scoreText.text = HighScore.ToString()+"m";
+        H_scoreText.text = HighScore.ToString();
         TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);   //Update coin count on start
         TotalCoinsText.text = TotalCoins.ToString();
     }
@@ -151,6 +152,7 @@ public class GameManager : MonoBehaviour
 
 
     //sound settings
+    public static int SoundSettings;
     public AudioSource BackGroundTheme;
     public Button SoundButton;
     float Volume;
@@ -161,11 +163,15 @@ public class GameManager : MonoBehaviour
         if(BackGroundTheme.mute == false)
         {
             BackGroundTheme.mute = true;
+            SoundSettings=1;
+            PlayerPrefs.SetInt("SoundSettings", SoundSettings);
             SoundButton.image.sprite = SoundOff;
         }
         else if (BackGroundTheme.mute == true)
         {
             BackGroundTheme.mute = false;
+            SoundSettings = 0;
+            PlayerPrefs.SetInt("SoundSettings", SoundSettings);
             SoundButton.image.sprite = SoundOn;
         }
     }

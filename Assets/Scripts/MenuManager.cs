@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
   
+    public void LoadSceneWithName(string name)
+    {
+        SceneManager.LoadScene(sceneName:name);
+    }
+
 
     //go next scene
     public void NextScene()
